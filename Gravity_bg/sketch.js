@@ -1,11 +1,6 @@
 let PLANETS_COUNT = 50;
 let ASTEROIDS_COUNT = 200;
 
-if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-    PLANETS_COUNT = 10;
-    ASTEROIDS_COUNT = 20;
-    console.log('runnin on a phone!')
-}
 
 
 let PARTICLE_COUNT = PLANETS_COUNT + ASTEROIDS_COUNT;
@@ -71,16 +66,13 @@ function setup() {
         particles.push(createPlanet());
     }
 
-    console.log(ASTEROIDS_COUNT, PLANETS_COUNT, PARTICLE_COUNT);
-
-    // a = [1,2,3,4,5]
-    // for(let i=2;i<7; i++){
-    //     a = insert(1000,i,a)
-    // }
-    // // a = insert(1000,3,a)
-    // blendMode(DODGE ) ;
-
-    console.log(ASTEROID_MASS_PER_PX, PLANET_MASS_PER_PX)
+    // make simulation faster on phones
+    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+        PLANETS_COUNT = 10;
+        ASTEROIDS_COUNT = 20;
+        pixelDensity(1)
+        console.log('runnin on a phone!')
+    }    
 }
 
 function draw() {
