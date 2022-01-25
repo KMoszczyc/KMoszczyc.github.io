@@ -16,11 +16,11 @@ for (let i=0; i< themeDots.length; i++) {
 
 function setTheme(mode) {
     switch (mode){
-        case 'light':
+        case 'blue':
             document.getElementById('theme-style').href = 'default.css'
             break;
-        case 'blue':
-            document.getElementById('theme-style').href = 'blue.css'
+        case 'red':
+            document.getElementById('theme-style').href = 'red.css'
             break;
         case 'green':
             document.getElementById('theme-style').href = 'green.css'
@@ -32,3 +32,5 @@ function setTheme(mode) {
 
     localStorage.setItem('theme', mode)
 }
+
+

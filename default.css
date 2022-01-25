@@ -1,18 +1,34 @@
-
 :root {
-    --mainColor: #eaeaea;
-    --secondaryColor: #fff;
+    --mainColor: rgba(21, 32, 43, 0.7);
+    --secondaryColor: rgba(25, 39, 52, 0.7); 
 
-    --borderColor: #c1c1c1;
+    --borderColor: #164d56;
 
-    --mainText: #000;
-    --secondaryText: #4b5156;
+    --mainText: #fff;
+    --secondaryText: #eeeeee;
 
-    --themeDotBorder: #24292e;
-    --previewBG: rgb(251, 249, 243, 0.8);
-    --previewShadow: #f0ead6;
+    --themeDotBorder: #fff;
+    --previewBG: rgb(25, 39, 52, 0.8);
+    --previewShadow: #111921;
 
-    --buttonColor: black;
+    --buttonColor: #17a2b8;
+}
+
+#body-container {
+    position: relative;
+}
+iframe { 
+    position: absolute;
+    pointer-events:none;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    width: 100%; height: 100%;
+    z-index: -1;
 }
 
 html, body {
@@ -28,6 +44,10 @@ h1,h2,h3,h4,h5,h6, strong, a {
     color: var(--mainText);
     font-family: 'Russo One', sans-serif;
     font-weight: 500;
+}
+
+.s1 h1,h2,h3,h4,h5,h6 {
+    color: #fff;
 }
 
 a {
@@ -51,8 +71,13 @@ p, li, span, label, input, textarea {
     font-family: 'Roboto Mono', monospace;
 }
 
+#sections-container {
+    position: relative;
+}
+
 .s1 {
     background-color: var(--mainColor);
+    background: transparent;
     border-bottom: 1px solid var(--borderColor);
     overflow: auto;
 }
@@ -186,12 +211,12 @@ p, li, span, label, input, textarea {
     border-width: 5px;
 }
 
-#light-mode {
-    background-color: #fff;
-}
-
 #blue-mode {
     background-color: #192734;
+}
+
+#red-mode {
+    background-color: #590004;
 }
 
 #green-mode {
