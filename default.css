@@ -77,6 +77,10 @@ p, li, span, label, input, textarea {
     font-family: 'Roboto Mono', monospace;
 }
 
+textarea {
+    resize: none;
+}
+
 #sections-container {
     position: relative;
 }
