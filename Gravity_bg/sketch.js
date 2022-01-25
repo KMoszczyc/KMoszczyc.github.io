@@ -1,5 +1,13 @@
 let PLANETS_COUNT = 50;
 let ASTEROIDS_COUNT = 200;
+
+if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+    PLANETS_COUNT = 10;
+    ASTEROIDS_COUNT = 20;
+    console.log('runnin on a phone!')
+}
+
+
 let PARTICLE_COUNT = PLANETS_COUNT + ASTEROIDS_COUNT;
 
 let particles = [];
