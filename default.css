@@ -397,6 +397,10 @@ textarea {
     font-size: 14px;
 }
 
+input:-webkit-autofill {
+    transition-delay: 3600s;
+}
+
 #submit-btn {
     margin-top: 10px;
     width: 100%;
@@ -404,8 +408,20 @@ textarea {
     padding-bottom: 10px;
     color: #fff;
     background-color: var(--buttonColor);
+    font-family: 'Russo One', sans-serif;
     border: none;
     border-radius: 5px;
+}
+
+.alert {
+    text-align: center;
+    padding: 10px;
+    background: #79c879;
+    color: var(--mainText);
+    font-family: 'Russo One', sans-serif;
+    font-weight: 100;
+    margin-bottom: 10px;
+    display: none;
 }
 
 @media screen and (max-width: 1200px){

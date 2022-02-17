@@ -1,8 +1,6 @@
 let PLANETS_COUNT = 50;
 let ASTEROIDS_COUNT = 200;
 
-
-
 let PARTICLE_COUNT = PLANETS_COUNT + ASTEROIDS_COUNT;
 
 let particles = [];
@@ -11,7 +9,8 @@ let particlesPivotIndex = ASTEROIDS_COUNT;
 const G_CONSTANT = 0.02;
 let ASTEROID_MASS_PER_PX = 1;
 let PLANET_MASS_PER_PX = 100;
-let canvas
+let canvas;
+let maxWidth, maxHeight ;
 
 const asteroidsSlider = document.getElementById("asteroids-slider");
 const asteroidsSliderValue = document.getElementById("asteroids-value");
@@ -26,36 +25,12 @@ const planetGravitySlider = document.getElementById("planet-gravity-slider");
 const planetGravitySliderValue = document.getElementById("planet-gravity-value");
 
 
-// asteroidsSliderValue.innerHTML = ASTEROIDS_COUNT;
-// asteroidsSlider.value = ASTEROIDS_COUNT;
-
-// planetsSliderValue.innerHTML = PLANETS_COUNT;
-// planetsSlider.value = PLANETS_COUNT;
-
-// asteroidGravitySliderValue.innerHTML = ASTEROID_MASS_PER_PX;
-// asteroidGravitySlider.value = ASTEROID_MASS_PER_PX;
-
-// planetGravitySliderValue.innerHTML = PLANET_MASS_PER_PX;
-// planetGravitySlider.value = PLANET_MASS_PER_PX;
-
-// asteroidsSlider.oninput = function () {
-//     asteroidsSliderValue.innerHTML = this.value;
-//     ASTEROIDS_COUNT = parseInt(this.value);
-//     PARTICLE_COUNT = ASTEROIDS_COUNT + PLANETS_COUNT;
-//     updateAsteroidCount();
-// };
-
-// planetsSlider.oninput = function () {
-//     planetsSliderValue.innerHTML = this.value;
-//     PLANETS_COUNT = parseInt(this.value);
-//     PARTICLE_COUNT = ASTEROIDS_COUNT + PLANETS_COUNT;
-//     updatePlanetCount();
-// };
-
-
 function setup() {
-    canvas = createCanvas(window.innerWidth, window.innerHeight);
-    window.addEventListener("resize", () => resizeCanvas(window.innerWidth, window.innerHeight), false);
+    maxHeight = window.innerHeight + 100
+    maxWidth = window.innerHeight
+
+    canvas = createCanvas(maxWidth, maxHeight);
+    window.addEventListener("resize", onCanvasResize, false);
 
     console.log(window.innerWidth, window.innerHeight)
     for (let i = 0; i < ASTEROIDS_COUNT; i++) {
@@ -105,6 +80,14 @@ function draw() {
     }
 
     // console.log(frameRate());
+}
+
+function onCanvasResize() {
+    if(window.innerWidth > maxWidth || window.innerHeight > maxHeight){
+        resizeCanvas(window.innerWidth, window.innerHeight)
+        maxHeight = window.innerHeight
+        maxWidth = window.innerWidth
+    }
 }
 
 function updateAsteroidsMass() {
