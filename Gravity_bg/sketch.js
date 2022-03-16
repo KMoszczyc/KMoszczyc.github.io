@@ -1,57 +1,44 @@
-let PLANETS_COUNT = 50;
-let ASTEROIDS_COUNT = 200;
-
-let PARTICLE_COUNT = PLANETS_COUNT + ASTEROIDS_COUNT;
+const G_CONSTANT = 0.02;
+const PLANETS_COUNT = 50;
+const ASTEROIDS_COUNT = 200;
 
 let particles = [];
-let particlesPivotIndex = ASTEROIDS_COUNT;
-
-const G_CONSTANT = 0.02;
-let ASTEROID_MASS_PER_PX = 1;
-let PLANET_MASS_PER_PX = 100;
 let canvas;
-let maxWidth, maxHeight ;
+let maxWidth, maxHeight;
 
-const asteroidsSlider = document.getElementById("asteroids-slider");
-const asteroidsSliderValue = document.getElementById("asteroids-value");
-
-const planetsSlider = document.getElementById("planets-slider");
-const planetsSliderValue = document.getElementById("planets-value");
-
-const asteroidGravitySlider = document.getElementById("asteroid-gravity-slider");
-const asteroidGravitySliderValue = document.getElementById("asteroid-gravity-value");
-
-const planetGravitySlider = document.getElementById("planet-gravity-slider");
-const planetGravitySliderValue = document.getElementById("planet-gravity-value");
-
-
+/**
+ * Setup function called once in a simulation.
+ */
 function setup() {
-    maxHeight = window.innerHeight + 100
-    maxWidth = window.innerHeight
+    maxHeight = window.innerHeight + 100;
+    maxWidth = window.innerHeight;
 
     canvas = createCanvas(maxWidth, maxHeight);
     window.addEventListener("resize", onCanvasResize, false);
 
-    console.log(window.innerWidth, window.innerHeight)
+    console.log(window.innerWidth, window.innerHeight);
     for (let i = 0; i < ASTEROIDS_COUNT; i++) {
-        particles.push(createAsteroid());
+        particles.push(createParticle(0, 2));
     }
 
     for (let i = 0; i < PLANETS_COUNT; i++) {
-        particles.push(createPlanet());
+        particles.push(createParticle(4, 12));
     }
 
     // make simulation faster on phones
-    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
         PLANETS_COUNT = 10;
         ASTEROIDS_COUNT = 20;
-        pixelDensity(1)
-        console.log('runnin on a phone!')
-    }    
+        pixelDensity(1);
+        console.log("runnin on a phone!");
+    }
 }
 
+/**
+ * Draw function called 60 times a second at max (the more demanding the simulation the less calls)
+ */
 function draw() {
-    // background(0, 0, 0, 10);
+    // sets a transparent background that gives the particles a nice fading trail effect
     background("rgba(0, 0, 0, 0.05)");
 
     // update forces
@@ -68,7 +55,6 @@ function draw() {
         }
     }
 
-
     // move and show
     for (let i = 0; i < particles.length; i++) {
         particles[i].move();
@@ -78,71 +64,34 @@ function draw() {
     for (let i = 0; i < particles.length; i++) {
         particles[i].show();
     }
-
-    // console.log(frameRate());
 }
 
+/**
+ * Helper function for canvas resizing, designed to minimize the number of times canvas gets resized. (only when browser's current height or width is bigger than the canvas)
+ */
 function onCanvasResize() {
-    if(window.innerWidth > maxWidth || window.innerHeight > maxHeight){
-        resizeCanvas(window.innerWidth, window.innerHeight)
-        maxHeight = window.innerHeight
-        maxWidth = window.innerWidth
+    if (window.innerWidth > maxWidth || window.innerHeight > maxHeight) {
+        resizeCanvas(window.innerWidth, window.innerHeight);
+        maxHeight = window.innerHeight;
+        maxWidth = window.innerWidth;
     }
 }
 
-function updateAsteroidsMass() {
-    for (let i = 0; i < ASTEROIDS_COUNT; i++) {
-        particles[i].mass = calculateMass(particles[i].radius)
-    }
-}
-
-function updatePlanetsMass() {
-    for (let i = ASTEROIDS_COUNT; i < particles.length; i++) {
-        particles[i].mass = calculateMass(particles[i].radius)
-    }
-}
-
-function updateAsteroidCount() {
-    if (PARTICLE_COUNT > particles.length) {
-        for (let i = 0; i < PARTICLE_COUNT - particles.length; i++) {
-            if (particles.length == 0) particles.push(createAsteroid());
-            else particles = insert(createAsteroid(), i, particles);
-        }
-    } else if (PARTICLE_COUNT < particles.length) {
-        for (let i = particles.length - 1 - PLANETS_COUNT; i >= ASTEROIDS_COUNT; i--) {
-            particles.splice(0, 1);
-        }
-    }
-}
-
-function updatePlanetCount() {
-    if (PARTICLE_COUNT > particles.length) {
-        for (let i = 0; i < PARTICLE_COUNT - particles.length; i++) {
-            particles.push(createPlanet());
-        }
-    } else if (PARTICLE_COUNT < particles.length) {
-        for (let i = particles.length - 1; i >= PARTICLE_COUNT; i--) {
-            particles.pop();
-        }
-    }
-}
-
-function createAsteroid() {
-    let radius = random(0, 2);
-    let mass = calculateMass(radius)
+/**
+ * Creates a particle with a random radius, and mass in relation to it.
+ * @returns a new Particle object (Asteroid - small object, low mass, Planet - bigger object, bigger mass)
+ */
+function createParticle(minRadius, maxRadius) {
+    let radius = random(minRadius, maxRadius);
+    let mass = calculateMass(radius);
     return new Particle(random(width), random(height), mass, radius);
 }
 
-function createPlanet() {
-    let radius = random(4, 12);
-    let mass = calculateMass(radius)
-    return new Particle(random(width), random(height), mass, radius);
-}
-
-function insert(element, index, arr) {
-    return arr.reduce((s, a, j) => (j - index ? s.push(a) : s.push(element, a), s), []);
-}
-
+/**
+ * Calculates mass based on modified Newtons equation for gravity. m = r*r*r
+ * @param {float} radius 
+ * @returns 
+ */
 function calculateMass(radius) {
-    return radius * radius * radius * ASTEROID_MASS_PER_PX;
+    return radius * radius * radius;
 }

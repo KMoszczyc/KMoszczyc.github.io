@@ -1,7 +1,3 @@
-
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyD-vpfFhrI4SCVHlr9ejRolu2kDWqidPEE",
   authDomain: "portfolio-contact-form-2253d.firebaseapp.com",
@@ -25,7 +21,7 @@ contactForm.addEventListener('submit', submitForm)
 
 
 if(theme==null) {
-    setTheme('light')
+    setTheme('blue')
 } else {
     setTheme(theme)
 }
@@ -37,7 +33,10 @@ for (let i=0; i< themeDots.length; i++) {
     })
 }
 
-
+/**
+ * Sets the color theme for the page
+ * @param {string} mode 
+ */
 function setTheme(mode) {
     switch (mode){
         case 'blue':
@@ -57,6 +56,11 @@ function setTheme(mode) {
     localStorage.setItem('theme', mode)
 }
 
+/**
+ * Gathers info from form and clears it after sending.
+ * @param {Event} e 
+ * @returns false - to prevent the form from reloading the page
+ */
 function submitForm(e){
     e.preventDefault();
 
@@ -77,11 +81,22 @@ function submitForm(e){
     return false
 }
 
+/**
+ * Extracts value from an input field.
+ * @param {string} id 
+ * @returns 
+ */
 function getInputVal(id){
     return document.getElementById(id).value
 }
 
-//Save message to firebase
+/**
+ * Sends form to firebase realtime database for future processing. 
+ * The form gets send to my email by firebase serverless function that listenes to changes in db.
+ * @param {string} subject 
+ * @param {string} email 
+ * @param {string} message 
+ */
 function saveMessage(subject, email, message) {
     console.log('there it goes')
     let newMessageRef = messagesRef.push()
