@@ -306,10 +306,11 @@ textarea {
     gap: 100px;
 }
 
-#skills {
+.skills {
     display: flex;
     justify-content: space-evenly;
     background-color: var(--previewShadow);
+    margin-bottom: 20px;
 }
 
 .social-links {

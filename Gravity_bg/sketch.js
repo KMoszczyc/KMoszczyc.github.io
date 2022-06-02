@@ -1,6 +1,6 @@
 const G_CONSTANT = 0.02;
 const PLANETS_COUNT = 50;
-const ASTEROIDS_COUNT = 200;
+const ASTEROIDS_COUNT = 100;
 
 let particles = [];
 let canvas;
@@ -15,6 +15,7 @@ function setup() {
 
     canvas = createCanvas(maxWidth, maxHeight);
     window.addEventListener("resize", onCanvasResize, false);
+    pixelDensity(1);
 
     console.log(window.innerWidth, window.innerHeight);
     for (let i = 0; i < ASTEROIDS_COUNT; i++) {
@@ -29,7 +30,6 @@ function setup() {
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
         PLANETS_COUNT = 10;
         ASTEROIDS_COUNT = 20;
-        pixelDensity(1);
         console.log("runnin on a phone!");
     }
 }
