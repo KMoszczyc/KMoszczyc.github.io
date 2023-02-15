@@ -1,6 +1,6 @@
 const G_CONSTANT = 0.02;
-const PLANETS_COUNT = 50;
-const ASTEROIDS_COUNT = 100;
+let PLANETS_COUNT = 50;
+let ASTEROIDS_COUNT = 100;
 
 let particles = [];
 let canvas;
@@ -32,6 +32,8 @@ function setup() {
         ASTEROIDS_COUNT = 20;
         console.log("runnin on a phone!");
     }
+
+    background(0);
 }
 
 /**
