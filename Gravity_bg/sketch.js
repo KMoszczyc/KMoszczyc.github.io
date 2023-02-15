@@ -15,7 +15,7 @@ function setup() {
 
     canvas = createCanvas(maxWidth, maxHeight);
     window.addEventListener("resize", onCanvasResize, false);
-    pixelDensity(1);
+    
 
     console.log(window.innerWidth, window.innerHeight);
     for (let i = 0; i < ASTEROIDS_COUNT; i++) {
@@ -31,6 +31,10 @@ function setup() {
         PLANETS_COUNT = 10;
         ASTEROIDS_COUNT = 20;
         console.log("runnin on a phone!");
+    } 
+    else {
+        // Makes the trail behind planets prettier, but it decreases performance on phones
+        pixelDensity(1);
     }
 
     background(0);
