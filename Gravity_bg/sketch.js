@@ -27,8 +27,8 @@ function setup() {
 
     // make simulation faster on phones
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-        PLANETS_COUNT = 30;
-        ASTEROIDS_COUNT = 60;
+        PLANETS_COUNT = 10;
+        ASTEROIDS_COUNT = 20;
         pixelDensity(1);
 
         console.log("runnin on a phone!");
