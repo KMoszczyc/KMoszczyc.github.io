@@ -6,7 +6,7 @@ class Particle {
         this.mass = mass
         this.radius = radius;
         this.force = createVector(0,0);
-        this.vel = createVector(random(-0.3, 0.3), random(-0.3, 0.3))
+        this.vel = createVector(random(-0.5, 0.5), random(-0.5, 0.5))
         // this.color = color(random(255), random(255), random(255), 100) // b is a random number between 0 - 100)
         this.color = color(random(255), random(255), random(255), 255) // b is a random number between 0 - 100)
     }

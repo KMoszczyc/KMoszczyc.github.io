@@ -100,7 +100,8 @@ textarea {
 }
 
 .main-container {
-    width: 1200px;
+    max-width: 1200px;
+    width: 100%;
     margin: 0 auto;
 }
 
@@ -182,8 +183,8 @@ textarea {
 
 .left-column {
     grid-area: left-column;
-    padding-top: 50px;
-    padding-bottom: 50px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 #profile_pic {
@@ -249,7 +250,7 @@ textarea {
     display: grid;
     align-content: center;
 
-    padding-top: 50px;
+    padding-top: 10px;
     padding-bottom: 50px;
 }
 
@@ -311,6 +312,20 @@ textarea {
     justify-content: space-evenly;
     background-color: var(--previewShadow);
     margin-bottom: 20px;
+    gap: 15px;
+    padding: 15px;
+}
+
+.skills ul {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 0;
+    /* padding: 20px; */
+}
+
+.skills li {
+
 }
 
 .social-links {
@@ -428,7 +443,7 @@ input:-webkit-autofill {
 
 @media screen and (max-width: 1200px){
     .main-container{
-        width: 95%;
+        width: 90%;
     }
 }
 
@@ -445,6 +460,13 @@ input:-webkit-autofill {
 
     .right-column {
         justify-content: center;
+        padding-right: 30px;
     }
+
+    #navigation li {
+        margin-right: 5px;
+        margin-left: 5px;
+    }
+    
     
 }

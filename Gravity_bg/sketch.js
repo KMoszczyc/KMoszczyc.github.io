@@ -15,9 +15,8 @@ function setup() {
 
     canvas = createCanvas(maxWidth, maxHeight);
     window.addEventListener("resize", onCanvasResize, false);
-    
-
     console.log(window.innerWidth, window.innerHeight);
+
     for (let i = 0; i < ASTEROIDS_COUNT; i++) {
         particles.push(createParticle(0, 2));
     }
@@ -28,14 +27,12 @@ function setup() {
 
     // make simulation faster on phones
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-        PLANETS_COUNT = 10;
-        ASTEROIDS_COUNT = 20;
+        PLANETS_COUNT = 30;
+        ASTEROIDS_COUNT = 60;
+        pixelDensity(1);
+
         console.log("runnin on a phone!");
     } 
-    else {
-        // Makes the trail behind planets prettier, but it decreases performance on phones
-        pixelDensity(1);
-    }
 
     background(0);
 }
@@ -80,6 +77,7 @@ function onCanvasResize() {
         resizeCanvas(window.innerWidth, window.innerHeight);
         maxHeight = window.innerHeight;
         maxWidth = window.innerWidth;
+        background(0);
     }
 }
 
@@ -90,7 +88,7 @@ function onCanvasResize() {
 function createParticle(minRadius, maxRadius) {
     let radius = random(minRadius, maxRadius);
     let mass = calculateMass(radius);
-    return new Particle(random(width), random(height), mass, radius);
+    return new Particle(random(window.innerWidth), random(window.innerHeight), mass, radius);
 }
 
 /**
